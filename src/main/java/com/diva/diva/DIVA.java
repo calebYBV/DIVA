@@ -14,14 +14,91 @@ public class DIVA {
 
         servidor.createContext("/", solicitud -> {
 
-            String texto = "DIVA está funcionando correctamente";
+            String pagina = """
+                    <html>
+                    <body>
+
+                    <h1>DIVA</h1>
+
+                    <p>
+                    DIVA realizará una prueba educativa de seguridad.
+                    No accederá ni modificará tu información personal.
+                    </p>
+
+                    <form action="/aceptar" method="POST">
+
+                        <p>Correo electrónico:</p>
+
+                        <input type="email" name="correo" required>
+
+                        <br><br>
+
+                        <input type="checkbox"
+                               name="terminos"
+                               required>
+
+                        Acepto participar.
+
+                        <br><br>
+
+                        <button type="submit">
+                            Participar
+                        </button>
+
+                    </form>
+
+                    </body>
+                    </html>
+                    """;
 
             byte[] respuesta =
-                    texto.getBytes(StandardCharsets.UTF_8);
+                    pagina.getBytes(StandardCharsets.UTF_8);
 
             solicitud.getResponseHeaders().set(
                     "Content-Type",
-                    "text/plain; charset=UTF-8"
+                    "text/html; charset=UTF-8"
+            );
+
+            solicitud.sendResponseHeaders(
+                    200,
+                    respuesta.length
+            );
+
+            solicitud.getResponseBody().write(respuesta);
+            solicitud.getResponseBody().close();
+        });
+
+        servidor.createContext("/aceptar", solicitud -> {
+
+            String datos = new String(
+                    solicitud.getRequestBody().readAllBytes(),
+                    StandardCharsets.UTF_8
+            );
+
+            System.out.println(
+                    "Consentimiento recibido: " + datos
+            );
+
+            String mensaje = """
+                    <html>
+                    <body>
+
+                    <h1>Consentimiento registrado</h1>
+
+                    <p>
+                    Gracias por participar en DIVA.
+                    </p>
+
+                    </body>
+                    </html>
+                    """;
+
+            byte[] respuesta =
+                    mensaje.getBytes(StandardCharsets.UTF_8);
+
+            solicitud.getResponseHeaders().set(
+                    "Content-Type",
+                    "text/html; charset=UTF-8"
             );
 
             solicitud.sendResponseHeaders(
