@@ -17,7 +17,7 @@ public class DIVA {
             String pagina = """
                     <html>
                     <body>
-                        chao pescao    
+                            
                     <h1>DIVA</h1>
 
                     <p>
