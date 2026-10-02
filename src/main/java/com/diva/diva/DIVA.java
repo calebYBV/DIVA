@@ -5,7 +5,6 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
 public class DIVA {
-
     public static void main(String[] args) throws Exception {
 
         HttpServer servidor = HttpServer.create(
