@@ -1,8 +1,10 @@
 package com.diva.diva;
 
 import com.sun.net.httpserver.HttpServer;
+import java.awt.Desktop;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.net.URI;
 
 public class DIVA {
 
@@ -115,5 +117,10 @@ public class DIVA {
         System.out.println(
                 "Servidor DIVA encendido en http://localhost:8080"
         );
+        
+        if (Desktop.isDesktopSupported()
+                && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
+            Desktop.getDesktop().browse(new URI ("http://localhost:8080"));
+        }
     }
 }
