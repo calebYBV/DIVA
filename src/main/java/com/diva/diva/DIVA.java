@@ -3,10 +3,11 @@ package com.diva.diva;
 import com.sun.net.httpserver.HttpServer;
 import java.awt.Desktop;
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 
 public class DIVA {
+
     public static void main(String[] args) throws Exception {
 
         HttpServer servidor = HttpServer.create(
@@ -15,42 +16,8 @@ public class DIVA {
 
         servidor.createContext("/", solicitud -> {
 
-            String pagina = """
-                    <html>
-                    <body>
-                            
-                    <h1>DIVA</h1>
-
-                    <p>
-                    DIVA realizará una prueba educativa de seguridad.
-                    No accederá ni modificará tu información personal.
-                    </p>
-
-                    <form action="/aceptar" method="POST">
-
-                        <p>Correo electrónico:</p>
-
-                        <input type="email" name="correo" required>
-
-                        <br><br>
-
-                        <input type="checkbox"
-                               name="terminos"
-                               required>
-
-                        Acepto participar.
-
-                        <br><br>
-
-                        <button type="submit">
-                            Participar
-                        </button>
-
-                    </form>
-
-                    </body>
-                    </html>
-                    """;
+            // Obtenemos el contenido desde la clase paginas.
+            String pagina = paginas.paginaPrincipal();
 
             byte[] respuesta =
                     pagina.getBytes(StandardCharsets.UTF_8);
@@ -80,19 +47,8 @@ public class DIVA {
                     "Consentimiento recibido: " + datos
             );
 
-            String mensaje = """
-                    <html>
-                    <body>
-
-                    <h1>Consentimiento registrado</h1>
-
-                    <p>
-                    Gracias por participar en DIVA.
-                    </p>
-
-                    </body>
-                    </html>
-                    """;
+            // Obtenemos la confirmación desde la clase paginas.
+            String mensaje = paginas.paginaConfirmacion();
 
             byte[] respuesta =
                     mensaje.getBytes(StandardCharsets.UTF_8);
@@ -116,10 +72,14 @@ public class DIVA {
         System.out.println(
                 "Servidor DIVA encendido en http://localhost:8080"
         );
-        
+
         if (Desktop.isDesktopSupported()
-                && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
-            Desktop.getDesktop().browse(new URI ("http://localhost:8080"));
+                && Desktop.getDesktop().isSupported(
+                        Desktop.Action.BROWSE)) {
+
+            Desktop.getDesktop().browse(
+                    new URI("http://localhost:8080")
+            );
         }
     }
 }
