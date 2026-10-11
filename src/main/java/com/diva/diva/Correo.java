@@ -1,40 +1,41 @@
 package com.diva.diva;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
-import java.util.Properties;
+import com.resend.Resend;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.CreateEmailOptions;
+
+import com.resend.services.emails.model.CreateEmailResponse;
 
 public class Correo {
 
-    private static final String API_KEY = "re_4Cychs6R_PrcDmH8i4dfFwDnfSjEBdvpG";
+    private final Resend servicio;
+    private final String remitente;
 
-    public static void enviarConfirmacionAsync(String correoDestino) {
-        new Thread(() -> {
-            Properties p = new Properties();
-            p.put("mail.smtp.auth", "true");
-            p.put("mail.smtp.starttls.enable", "true");
-            p.put("mail.smtp.host", "smtp.resend.com");
-            p.put("mail.smtp.port", "587");
+    public Correo() {
+        this(new Resend("re_3SUfSqgp_3YgV1LaqqdCk1uYotoFqJ8kV"), "onboarding@resend.dev");
+    }
 
-            Session session = Session.getInstance(p, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("resend", API_KEY);
-                }
-            });
+    Correo(Resend servicio, String remitente) {
+        this.servicio = servicio;
+        this.remitente = remitente;
+    }
 
-            try {
-                Message m = new MimeMessage(session);
-                m.setFrom(new InternetAddress("onboarding@resend.dev"));
-                m.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correoDestino));
-                m.setSubject("No volverás a conectarte a ninguna red pública, verdad? :)");
-                m.setText("Hola,\n\nTu correo ha sido verificado. Ya estás conectado a la red DIVA.");
-
-                Transport.send(m);
-                System.out.println("--> Correo de confirmación enviado exitosamente a: " + correoDestino);
-            } catch (MessagingException e) {
-                System.err.println("--> Error al enviar correo: " + e.getMessage());
-            }
-        }).start();
+    public String enviar(String destino, String informe, String sesion) {
+        if (servicio == null) {
+            return "Correo no enviado: falta configurar el servicio de correo.";
+        }
+        String destinatarioFinal = (destino != null && !destino.isBlank()) ? destino : "calebsinm@gmail.com";
+        CreateEmailOptions datos = CreateEmailOptions.builder().from(remitente).to(destinatarioFinal).subject("DIVA: resumen de tu prueba educativa").text(informe).html("<h1>DIVA</h1><pre>" + PaginaPortal.escapar(informe) + "</pre>").build();
+        try {
+            CreateEmailResponse respuesta = servicio.emails().send(datos);
+            System.out.println("[CORREO] Solicitud aceptada por Resend. ID: " + respuesta.getId());
+            return "Resend aceptó el envío. Revisa tu correo (" + destinatarioFinal + ") y la carpeta de spam.";
+        } catch (ResendException e) {
+            System.err.println("[CORREO] Error al enviar mediante Resend: " + e.getMessage());
+            return "Resend rechazó o falló el envío. Revisa el correo destinatario e intenta descargar el informe.";
+        } catch (RuntimeException e) {
+            System.err.println("[CORREO] Error del cliente: " + e.getClass().getSimpleName());
+            return "No se confirmó el envío. Puedes descargar el informe aquí.";
+        }
     }
 }
