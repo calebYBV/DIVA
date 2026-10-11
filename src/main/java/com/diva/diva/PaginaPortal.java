@@ -6,7 +6,7 @@ public class PaginaPortal {
                 <h1>DIVA</h1>
                 <p>Para continuar, por favor introduce tu correo electrónico y acepta los términos.</p>
                 <form action="/aceptar" method="POST">
-                    <input type="hidden" name="token" value=""" + token + """>
+                    <input type="hidden" name="token" value="%s" >
                     <label for="email">Correo electrónico:</label>
                     <input type="email" id="email" name="email" required>
                     <br>
