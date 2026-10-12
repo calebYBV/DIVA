@@ -6,6 +6,7 @@ public class PaginaPortal {
 
         return envolver("""
                 <h1>DIVA</h1>
+<<<<<<< HEAD
 
                 <form action="/aceptar" method="post">
 
@@ -47,6 +48,14 @@ public class PaginaPortal {
                   </details>
 
                   <p>
+=======
+                <p>Para continuar, por favor introduce tu correo electrónico y acepta los términos.</p>
+                <form action="/aceptar" method="POST">
+                    <input type="hidden" name="token" value="%s" >
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                    <br>
+>>>>>>> 3c3df1057af8631e2fc25da8f66939d8c45f0487
                     <label>
                       <input type="checkbox"
                              name="consentimiento"
