@@ -9,7 +9,7 @@ package com.diva.diva;
  * @author User
  */
 public class InterfazGrafica extends javax.swing.JFrame {
-    
+    private boolean divaActiva = false;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InterfazGrafica.class.getName());
 
     /**
@@ -17,6 +17,9 @@ public class InterfazGrafica extends javax.swing.JFrame {
      */
     public InterfazGrafica() {
         initComponents();
+        setTitle("DIVA - DETECCION INTELIGENTE DE VULNERABILIDADES AUTORIZADAS");
+    setLocationRelativeTo(null);
+    setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -28,21 +31,201 @@ public class InterfazGrafica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        BarraSuperior = new javax.swing.JPanel();
+        divacompleto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        fondoatras = new javax.swing.JPanel();
+        fondopequeño = new javax.swing.JPanel();
+        mensajepanel = new javax.swing.JLabel();
+        divanombre = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        Activar = new javax.swing.JButton();
+        barralado1 = new javax.swing.JPanel();
+        barralado2 = new javax.swing.JPanel();
+        barraAbajo = new javax.swing.JPanel();
+        paneldiva2 = new javax.swing.JPanel();
+        paneldiva1 = new javax.swing.JPanel();
+        paneldiva4 = new javax.swing.JPanel();
+        paneldiva3 = new javax.swing.JPanel();
+        paneldiva5 = new javax.swing.JPanel();
+        paneldiva6 = new javax.swing.JPanel();
+        paneldiva7 = new javax.swing.JPanel();
+        paneldiva8 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 0, 102));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BarraSuperior.setBackground(new java.awt.Color(255, 102, 153));
+        BarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        divacompleto.setFont(new java.awt.Font("MS Gothic", 0, 14)); // NOI18N
+        divacompleto.setForeground(new java.awt.Color(255, 255, 255));
+        divacompleto.setText("DETECCION INTELIGENTE DE VULNERABILIDADES AUTORIZADAS");
+        BarraSuperior.add(divacompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 390, 20));
+
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 204));
+        jLabel1.setText("DIVA IS COMING");
+        BarraSuperior.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 190, 20));
+
+        getContentPane().add(BarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 40));
+
+        fondoatras.setBackground(new java.awt.Color(102, 0, 102));
+        fondoatras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        fondopequeño.setBackground(new java.awt.Color(255, 204, 255));
+        fondopequeño.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        mensajepanel.setFont(new java.awt.Font("Mongolian Baiti", 0, 14)); // NOI18N
+        mensajepanel.setText("!ACTIVA");
+        fondopequeño.add(mensajepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        divanombre.setFont(new java.awt.Font("Mongolian Baiti", 1, 50)); // NOI18N
+        divanombre.setForeground(new java.awt.Color(0, 153, 0));
+        divanombre.setText("DIVA.EXE");
+        divanombre.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        fondopequeño.add(divanombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 320, 60));
+
+        jLabel2.setText("PARA CONTUNUAR!");
+        fondopequeño.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
+
+        Activar.setBackground(new java.awt.Color(204, 255, 204));
+        Activar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Activar.setForeground(new java.awt.Color(153, 0, 102));
+        Activar.setText("ACTIVAR ");
+        Activar.addActionListener(this::ActivarActionPerformed);
+        fondopequeño.add(Activar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 170, 70));
+
+        fondoatras.add(fondopequeño, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 270, 350));
+
+        barralado1.setBackground(new java.awt.Color(255, 102, 153));
+        barralado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(barralado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 20, 360));
+
+        barralado2.setBackground(new java.awt.Color(255, 102, 153));
+
+        javax.swing.GroupLayout barralado2Layout = new javax.swing.GroupLayout(barralado2);
+        barralado2.setLayout(barralado2Layout);
+        barralado2Layout.setHorizontalGroup(
+            barralado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        barralado2Layout.setVerticalGroup(
+            barralado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
+
+        fondoatras.add(barralado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 20, 360));
+
+        barraAbajo.setBackground(new java.awt.Color(255, 102, 153));
+        barraAbajo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(barraAbajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 660, 10));
+
+        paneldiva2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 30, 320));
+
+        paneldiva1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 30));
+
+        paneldiva4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 40, 270));
+
+        paneldiva3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 90, 30));
+
+        paneldiva5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 40, 320));
+
+        paneldiva6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 30, 320));
+
+        paneldiva7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 50, 20));
+
+        paneldiva8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(paneldiva8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 40, 320));
+
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 30, 320));
+
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 50, 20));
+
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 50, 30));
+
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 40, 290));
+
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        fondoatras.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 40, 20));
+
+        getContentPane().add(fondoatras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 700, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActivarActionPerformed
+
+        if (!divaActiva) {
+
+            Activar.setEnabled(false);
+            Activar.setText("INICIANDO...");
+
+            new javax.swing.SwingWorker<Void, Void>() {
+
+                @Override
+                protected Void doInBackground() throws Exception {
+
+                    // Aquí se conectará el inicio de la demostración local.
+
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+
+                        divaActiva = true;
+                        Activar.setText("DESACTIVAR");
+
+                        javax.swing.JOptionPane.showMessageDialog(
+                            InterfazGrafica.this,
+                            "DIVA está activada."
+                        );
+
+                    } catch (Exception e) {
+                        Activar.setText("ACTIVAR");
+
+                        javax.swing.JOptionPane.showMessageDialog(
+                            InterfazGrafica.this,
+                            "Error: " + e.getMessage()
+                        );
+                    }
+
+                    Activar.setEnabled(true);
+                }
+
+            }.execute();
+
+        } else {
+
+            Activar.setText("ACTIVAR");
+            divaActiva = false;
+
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "DIVA ha sido desactivada."
+            );
+        }
+    }//GEN-LAST:event_ActivarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +253,30 @@ public class InterfazGrafica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Activar;
+    private javax.swing.JPanel BarraSuperior;
+    private javax.swing.JPanel barraAbajo;
+    private javax.swing.JPanel barralado1;
+    private javax.swing.JPanel barralado2;
+    private javax.swing.JLabel divacompleto;
+    private javax.swing.JLabel divanombre;
+    private javax.swing.JPanel fondoatras;
+    private javax.swing.JPanel fondopequeño;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JLabel mensajepanel;
+    private javax.swing.JPanel paneldiva1;
+    private javax.swing.JPanel paneldiva2;
+    private javax.swing.JPanel paneldiva3;
+    private javax.swing.JPanel paneldiva4;
+    private javax.swing.JPanel paneldiva5;
+    private javax.swing.JPanel paneldiva6;
+    private javax.swing.JPanel paneldiva7;
+    private javax.swing.JPanel paneldiva8;
     // End of variables declaration//GEN-END:variables
 }
